@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlDynamicConsole", "XmlDynamicConsole\XmlDynamicConsole.csproj", "{4A1CCFA1-6EA1-4A00-8E1C-6A921B265E4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{11638E4C-48E5-4A6C-BC6A-3DF2DB4587B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlDynamic", "XmlDynamic\XmlDynamic.csproj", "{0B924EAE-21EE-4FEF-A1F6-F57430B6EBD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{4A1CCFA1-6EA1-4A00-8E1C-6A921B265E4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A1CCFA1-6EA1-4A00-8E1C-6A921B265E4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A1CCFA1-6EA1-4A00-8E1C-6A921B265E4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11638E4C-48E5-4A6C-BC6A-3DF2DB4587B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11638E4C-48E5-4A6C-BC6A-3DF2DB4587B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11638E4C-48E5-4A6C-BC6A-3DF2DB4587B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11638E4C-48E5-4A6C-BC6A-3DF2DB4587B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B924EAE-21EE-4FEF-A1F6-F57430B6EBD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B924EAE-21EE-4FEF-A1F6-F57430B6EBD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B924EAE-21EE-4FEF-A1F6-F57430B6EBD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B924EAE-21EE-4FEF-A1F6-F57430B6EBD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
