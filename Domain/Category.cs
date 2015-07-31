@@ -26,6 +26,9 @@
         public string BlueprintData { get; set; }
 
         [NotMapped]
-        public ICollection<FieldDefinition> Fields { get; set; }
+        public ICollection<FieldDefinition> Fields
+        {
+            get { return Serializer.DeserializeBlueprint(BlueprintData); }
+        }
     }
 }

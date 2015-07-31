@@ -26,6 +26,11 @@
         public string ConstructData { get; set; }
 
         [NotMapped]
-        public ICollection<FieldValue> Fields { get; set; }
+        public ICollection<FieldValue> Fields
+        {
+            get { return Serializer.DeserializeConstruct(ConstructData, Category.Fields); }
+        }
+
+        public virtual Category Category { get; set; }
     }
 }
