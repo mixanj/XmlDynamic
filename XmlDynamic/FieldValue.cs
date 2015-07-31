@@ -5,6 +5,8 @@
     public class FieldValue
     {
         public Guid Id { get; set; }
+
+        public virtual dynamic GetValue() { return null; }
     }
 
     public class FieldValue<T> : FieldValue
@@ -16,5 +18,10 @@
         }
 
         public T Value { get; set; }
+
+        public override dynamic GetValue()
+        {
+            return Value;
+        }
     }
 }

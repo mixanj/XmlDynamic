@@ -2,8 +2,8 @@
 {
     using System;
     using System.IO;
+    using System.Linq;
     using Domain;
-    using XmlDynamic;
 
     class Program
     {
@@ -27,6 +27,12 @@
             };
 
             var customFactorFields = factor.Fields;
+
+            var definition = factor.Category.Fields;
+            foreach (var field in factor.Fields)
+            {
+                Console.WriteLine("{0} = {1}", definition.First(f => f.Id == field.Id).Name, field.GetValue());
+            }
 
             Console.ReadKey();
         }
