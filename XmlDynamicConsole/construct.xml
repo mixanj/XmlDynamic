@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<construct>
+  <field id="00000000-0000-0000-0000-000000000001">
+    <value>100</value>
+  </field>
+  <field id="00000000-0000-0000-0000-000000000002">
+    <value>Ahoj</value>
+  </field>
+</construct>

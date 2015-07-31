@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<blueprint>
+  <field id="00000000-0000-0000-0000-000000000001" name="Val1" type="System.Int32">
+    <metadata></metadata>
+  </field>
+  <field id="00000000-0000-0000-0000-000000000002" name="Val2" type="System.String">
+    <metadata></metadata>
+  </field>
+</blueprint>
