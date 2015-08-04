@@ -29,6 +29,7 @@
         public ICollection<FieldValue> Fields
         {
             get { return Serializer.DeserializeConstruct(ConstructData, Category.Fields); }
+            set { ConstructData = Serializer.SerializeConstruct(value); }
         }
 
         public virtual Category Category { get; set; }

@@ -29,6 +29,7 @@
         public ICollection<FieldDefinition> Fields
         {
             get { return Serializer.DeserializeBlueprint(BlueprintData); }
+            set { BlueprintData = Serializer.SerializeBlueprint(value); }
         }
     }
 }

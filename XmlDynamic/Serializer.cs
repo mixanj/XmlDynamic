@@ -12,6 +12,8 @@
         private const string XAttribute_Id = "id";
         private const string XAttribute_Name = "name";
         private const string XAttribute_Type = "type";
+        private const string XElement_Construct = "construct";
+        private const string XElement_Blueprint = "blueprint";
 
         /* Construct xml structure to deserialize
          * <construct>
@@ -43,6 +45,18 @@
             return fieldValue;
         }
 
+        public static string SerializeConstruct(ICollection<FieldValue> fields)
+        {
+            var construct = new XElement(XElement_Construct);
+            foreach (var field in fields)
+            {
+                var node = new XElement(XElement_Field, new XAttribute(XAttribute_Id, field.Id));
+                node.Value = field.GetValue().ToString();
+                construct.Add(node);
+            }
+            return construct.ToString();
+        }
+
         /* Blueprint xml structure to deserialize
          * <blueprint>
          *	<field id="" name="" type="System.Int32">
@@ -72,6 +86,22 @@
                 Name = name,
                 FieldType = Type.GetType(typeNme)
             };
+        }
+
+        public static string SerializeBlueprint(ICollection<FieldDefinition> fields)
+        {
+            var blueprint = new XElement(XElement_Blueprint);
+            foreach (var field in fields)
+            {
+                var node = new XElement(XElement_Field,
+                    new XAttribute(XAttribute_Id, field.Id),
+                    new XAttribute(XAttribute_Name, field.Name),
+                    new XAttribute(XAttribute_Type, field.FieldType.ToString()));
+                
+                // add metadata
+                blueprint.Add(node);
+            }
+            return blueprint.ToString();
         }
     }
 }
