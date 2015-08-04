@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Odbc;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
@@ -50,6 +49,7 @@
 
         static void PrintFactor(Factor factor)
         {
+            Console.WriteLine("Factor {0}", factor.Name);
             var definition = factor.Category.Fields;
             foreach (var field in factor.Fields)
             {
@@ -103,7 +103,15 @@
 
         static void TestReadWriteWithEF()
         {
-            const int numberOfFactors = 10000;
+            // Cleanup
+            using (var context = new DMContext())
+            {
+                context.Database.ExecuteSqlCommand("delete from Factors");
+                context.Database.ExecuteSqlCommand("delete from Categories");
+                context.SaveChanges();
+            }
+
+            const int numberOfFactors = 1000;
             var category = CreateCategory();
             var factors = new List<Factor>(numberOfFactors);
             for (int iterator = 1; iterator < numberOfFactors; iterator++)
@@ -125,12 +133,11 @@
             Console.WriteLine("Writing of {0} factors to DB took {1} ms", numberOfFactors, stopWatch.ElapsedMilliseconds);
 
             // Read
-            Category readCategory;
             List<Factor> readFactors;
             stopWatch.Start();
             using (var context = new DMContext())
             {
-                readFactors = context.Factors.ToList();
+                readFactors = context.Factors.Include("Category").ToList();
             }
             stopWatch.Stop();
             Console.WriteLine("Reading of {0} factors to DB took {1} ms", numberOfFactors, stopWatch.ElapsedMilliseconds);

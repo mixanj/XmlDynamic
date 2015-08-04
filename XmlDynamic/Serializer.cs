@@ -8,7 +8,6 @@
     public class Serializer
     {
         private const string XElement_Field = "field";
-        private const string XElement_Value = "value";
         private const string XAttribute_Id = "id";
         private const string XAttribute_Name = "name";
         private const string XAttribute_Type = "type";
@@ -17,12 +16,8 @@
 
         /* Construct xml structure to deserialize
          * <construct>
-         *	<field id="">
-         *		<value></value>
-         *	</field>
-         *	<field id="">
-         *		<value></value>
-         *	</field>
+         *	<field id="">100</field>
+         *	<field id="">Hello</field>
          * </construct>
          */
         public static ICollection<FieldValue> DeserializeConstruct(string constructData, ICollection<FieldDefinition> fieldDefs)
@@ -37,8 +32,7 @@
         {
             var id = Guid.Parse(field.Attribute(XAttribute_Id).Value);
             var fieldType = fieldDefs.Single(fd => fd.Id == id).FieldType;
-            var stringValue = field.Element(XElement_Value).Value;
-            var value = Convert.ChangeType(stringValue, fieldType);
+            var value = Convert.ChangeType(field.Value, fieldType);
             var fieldValue = (FieldValue)Activator.CreateInstance(
                 typeof(FieldValue<>).MakeGenericType(new [] { fieldType }),
                 id, value);
