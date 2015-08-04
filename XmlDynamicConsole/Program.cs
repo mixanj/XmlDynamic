@@ -130,14 +130,14 @@
                 factors.Add(CreateFactor(category, iterator));
             }
             
-            stopWatch.Start();
             using (var context = new DMContext())
             {
+                stopWatch.Start();
                 context.Categories.Add(category);
                 context.Factors.AddRange(factors);
                 context.SaveChanges();
+                stopWatch.Stop();
             }
-            stopWatch.Stop();
 
             Console.WriteLine("Writing of {0} factors to DB took {1} ms", numberOfFactors, stopWatch.ElapsedMilliseconds);
         }
@@ -146,12 +146,14 @@
         {
             var stopWatch = new Stopwatch();
             List<Factor> factors;
-            stopWatch.Start();
+            
             using (var context = new DMContext())
             {
+                stopWatch.Start();
                 factors = context.Factors.Include("Category").ToList();
+                stopWatch.Stop();
             }
-            stopWatch.Stop();
+            
             var numberOfFactors = factors.Count;
             Console.WriteLine("Reading of {0} factors from DB took {1} ms", numberOfFactors, stopWatch.ElapsedMilliseconds);
             //factors.Take(10).ToList().ForEach(PrintFactor);
@@ -161,17 +163,19 @@
         {
             var stopWatch = new Stopwatch();
             List<Factor> factors;
-            stopWatch.Start();
+            
             using (var context = new DMContext())
             {
+                stopWatch.Start();
                 var fieldId = context.Factors.First().Category.Fields.First(f => f.Name == "Val1").Id;
                 factors = context.Factors
                     .Include("Category")
-                    .ToList() // Because with xml deserialization we cant do Linq to entity
+                    .ToList() // Because of xml deserialization we cant do Linq to entity
                     .Where(f => f.Fields.Any(field => field.Id == fieldId && (field as FieldValue<int>).Value < 10))
                     .ToList();
+                stopWatch.Stop();
             }
-            stopWatch.Stop();
+            
             var numberOfFactors = factors.Count;
             Console.WriteLine("Linq query of {0} factors took {1} ms", numberOfFactors, stopWatch.ElapsedMilliseconds);
             //factors.ForEach(PrintFactor);
