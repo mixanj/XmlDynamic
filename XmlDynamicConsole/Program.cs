@@ -101,27 +101,35 @@
             };
         }
 
-        static void TestReadWriteWithEF()
+        static void CleanupDB()
         {
-            // Cleanup
             using (var context = new DMContext())
             {
                 context.Database.ExecuteSqlCommand("delete from Factors");
                 context.Database.ExecuteSqlCommand("delete from Categories");
                 context.SaveChanges();
             }
+        }
 
+        static void TestReadWriteWithEF()
+        {
             const int numberOfFactors = 1000;
+            CleanupDB();
+            WriteToDB(numberOfFactors);
+            ReadFromDB();
+            QueryDB();
+        }
+
+        static void WriteToDB(int numberOfFactors)
+        {
+            var stopWatch = new Stopwatch();
             var category = CreateCategory();
             var factors = new List<Factor>(numberOfFactors);
             for (int iterator = 1; iterator < numberOfFactors; iterator++)
             {
                 factors.Add(CreateFactor(category, iterator));
             }
-
-            var stopWatch = new Stopwatch();
-
-            // Write
+            
             stopWatch.Start();
             using (var context = new DMContext())
             {
@@ -130,25 +138,43 @@
                 context.SaveChanges();
             }
             stopWatch.Stop();
-            Console.WriteLine("Writing of {0} factors to DB took {1} ms", numberOfFactors, stopWatch.ElapsedMilliseconds);
 
-            // Read
-            List<Factor> readFactors;
+            Console.WriteLine("Writing of {0} factors to DB took {1} ms", numberOfFactors, stopWatch.ElapsedMilliseconds);
+        }
+
+        static void ReadFromDB()
+        {
+            var stopWatch = new Stopwatch();
+            List<Factor> factors;
             stopWatch.Start();
             using (var context = new DMContext())
             {
-                readFactors = context.Factors.Include("Category").ToList();
+                factors = context.Factors.Include("Category").ToList();
             }
             stopWatch.Stop();
-            Console.WriteLine("Reading of {0} factors to DB took {1} ms", numberOfFactors, stopWatch.ElapsedMilliseconds);
+            var numberOfFactors = factors.Count;
+            Console.WriteLine("Reading of {0} factors from DB took {1} ms", numberOfFactors, stopWatch.ElapsedMilliseconds);
+            //factors.Take(10).ToList().ForEach(PrintFactor);
+        }
 
-            for (int iterator = 1; iterator < numberOfFactors; iterator++)
+        static void QueryDB()
+        {
+            var stopWatch = new Stopwatch();
+            List<Factor> factors;
+            stopWatch.Start();
+            using (var context = new DMContext())
             {
-                if (iterator%100 == 0)
-                {
-                    PrintFactor(readFactors[iterator]);
-                }
+                var fieldId = context.Factors.First().Category.Fields.First(f => f.Name == "Val1").Id;
+                factors = context.Factors
+                    .Include("Category")
+                    .ToList() // Because with xml deserialization we cant do Linq to entity
+                    .Where(f => f.Fields.Any(field => field.Id == fieldId && (field as FieldValue<int>).Value < 10))
+                    .ToList();
             }
+            stopWatch.Stop();
+            var numberOfFactors = factors.Count;
+            Console.WriteLine("Linq query of {0} factors took {1} ms", numberOfFactors, stopWatch.ElapsedMilliseconds);
+            //factors.ForEach(PrintFactor);
         }
     }
 }
