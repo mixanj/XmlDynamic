@@ -146,11 +146,16 @@
         {
             var stopWatch = new Stopwatch();
             List<Factor> factors;
+            ICollection<FieldValue> fields;
             
             using (var context = new DMContext())
             {
                 stopWatch.Start();
                 factors = context.Factors.Include("Category").ToList();
+                foreach (var factor in factors)
+                {
+                    fields = factor.Fields;
+                }
                 stopWatch.Stop();
             }
             
