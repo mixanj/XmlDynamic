@@ -7,8 +7,8 @@
     <ProjectGuid>{0B924EAE-21EE-4FEF-A1F6-F57430B6EBD3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XmlDynamic</RootNamespace>
-    <AssemblyName>XmlDynamic</AssemblyName>
+    <RootNamespace>Dynamic.Xml</RootNamespace>
+    <AssemblyName>Dynamic.Xml</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

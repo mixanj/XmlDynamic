@@ -58,6 +58,10 @@
       <Project>{11638e4c-48e5-4a6c-bc6a-3df2db4587b2}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\XmlDynamic\Dynamic.Xml.csproj">
+      <Project>{0b924eae-21ee-4fef-a1f6-f57430b6ebd3}</Project>
+      <Name>Dynamic.Xml</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,7 +7,7 @@
     using System.Linq;
     using Data;
     using Domain;
-    using XmlDynamic;
+    using Dynamic.Xml;
 
     class Program
     {

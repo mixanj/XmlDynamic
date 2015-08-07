@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Dynamic.Xml")]
+[assembly: AssemblyTitle("StreamingFromSqlServer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Dynamic.Xml")]
+[assembly: AssemblyProduct("StreamingFromSqlServer")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("9f213e93-86ee-476c-8a34-3e3e27e6bf3f")]
+[assembly: Guid("6c0b29b3-2fb6-4618-b689-08e10d537a63")]
 
 // Version information for an assembly consists of the following four values:
 //

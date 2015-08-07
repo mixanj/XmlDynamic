@@ -1,4 +1,4 @@
-﻿namespace XmlDynamic
+﻿namespace Dynamic.Xml
 {
     public class Metadata
     {

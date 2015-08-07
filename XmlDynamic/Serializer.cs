@@ -1,8 +1,9 @@
-﻿namespace XmlDynamic
+﻿namespace Dynamic.Xml
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Xml;
     using System.Xml.Linq;
 
     public class Serializer
@@ -20,6 +21,14 @@
          *	<field id="">Hello</field>
          * </construct>
          */
+        public static ICollection<FieldValue> DeserializeConstruct(XmlReader constructData, ICollection<FieldDefinition> fieldDefs)
+        {
+            var fields = new List<FieldValue>(fieldDefs.Count);
+            var construct = new XDocument(constructData).Elements(XElement_Field);
+            fields.AddRange(construct.Select(xmlField => DeserializeField(xmlField, fieldDefs)));
+            return fields;
+        }
+        
         public static ICollection<FieldValue> DeserializeConstruct(string constructData, ICollection<FieldDefinition> fieldDefs)
         {
             var fields = new List<FieldValue>(fieldDefs.Count);
@@ -61,6 +70,14 @@
          *	</field>
          * </blueprint>
          */
+        public static ICollection<FieldDefinition> DeserializeBlueprint(XmlReader blueprintData)
+        {
+            var fields = new List<FieldDefinition>();
+            var blueprint = new XDocument(blueprintData).Elements(XElement_Field);
+            fields.AddRange(blueprint.Select(DeserializeFieldDef));
+            return fields;
+        }
+
         public static ICollection<FieldDefinition> DeserializeBlueprint(string blueprintData)
         {
             var fields = new List<FieldDefinition>();
