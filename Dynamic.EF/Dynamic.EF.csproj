@@ -47,7 +47,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XmlDynamic\Dynamic.Xml.csproj">
+    <ProjectReference Include="..\Dynamic.Xml\Dynamic.Xml.csproj">
       <Project>{0b924eae-21ee-4fef-a1f6-f57430b6ebd3}</Project>
       <Name>Dynamic.Xml</Name>
     </ProjectReference>
